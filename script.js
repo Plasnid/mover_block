@@ -1,18 +1,15 @@
 //* reference speed
-let speed = 15;
+let speed = 50;
 
 //* reference the bounds of the play area;
 let playSpace = document.querySelector("#playSpace");
-let playSpaceTop = playSpace.getBoundingClientRect().top;
-let playSpaceLeft =playSpace.getBoundingClientRect().left;
-let playSpaceBottom = playSpaceTop + playSpace.clientHeight;
-let playSpaceRight = playSpaceLeft + playSpace.clientWidth;
 
 //* reference the main character
 let mainChar = document.querySelector("#mainChar");
 charPos = mainChar.getBoundingClientRect();
-let charTop = (playSpaceBottom - playSpaceTop)/2;
-let charLeft = (playSpaceRight-playSpaceLeft)/2;
+console.log(charPos.width);
+let charTop = (playSpace.clientHeight)/2;
+let charLeft = (playSpace.clientWidth)/2;
 mainChar.style.top = `${charTop}px`;
 mainChar.style.left = `${charLeft}px`;
 
@@ -21,14 +18,21 @@ document.addEventListener("keydown", keyPressAction);
 function moveDir(motionDir){
     newLeft = charLeft + (speed*motionDir.hs);
     newTop =  charTop + (speed*motionDir.vs);
-    if(newLeft>playSpaceLeft && newLeft<playSpaceRight){
+    if(newLeft>0 && newLeft<playSpace.clientWidth - (charPos.width)){
         charLeft = newLeft;
-        gsap.to(mainChar, { left: charLeft, duration: .5 });
+    }else if(newLeft<=0){
+        charLeft = 0;
+    }else{
+        charLeft = playSpace.clientWidth-charPos.width;
     }
-    if(newTop>playSpaceTop && newTop<playSpaceBottom){
+    if(newTop>0 && newTop<playSpace.clientHeight - (charPos.width/2)){
         charTop = newTop;
-        gsap.to(mainChar, { top: charTop, duration: .5 });
+    }else if(newTop<=0){
+        charTop = 0;
+    }else{
+        charTop = playSpace.clientHeight-charPos.height;
     }
+    gsap.to(mainChar, { top: charTop, left:charLeft, duration: .5 });
 }
 function keyPressAction(e){
     switch(e.keyCode){
