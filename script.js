@@ -1,6 +1,9 @@
 //* reference speed
 let speed = 50;
 
+//* reference for audio
+let footsteps = document.querySelector("#moveSound");
+
 //* reference the bounds of the play area;
 let playSpace = document.querySelector("#playSpace");
 
@@ -32,6 +35,7 @@ function moveDir(motionDir){
     }else{
         charTop = playSpace.clientHeight-charPos.height;
     }
+    footsteps.play();
     gsap.to(mainChar, { top: charTop, left:charLeft, duration: .5 });
 }
 function keyPressAction(e){
