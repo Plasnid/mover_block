@@ -10,7 +10,7 @@ let playSpace = document.querySelector("#playSpace");
 
 //* reference the main character
 let hero = document.querySelector("#hero");
-heroPos = hero.getBoundingClientRect();
+let heroPos = hero.getBoundingClientRect();
 console.log(heroPos.width);
 let heroTop = (playSpace.clientHeight)/2;
 let heroLeft = (playSpace.clientWidth)/2;
@@ -44,8 +44,6 @@ function moveDir(motionDir){
     newLeft = heroLeft + (speed*motionDir.hs);
     newTop =  heroTop + (speed*motionDir.vs);
     let playBonk = false;
-    bonkers.currentTime = 0;
-    footsteps.currentTime = 0;
     if(newLeft>0 && newLeft<playSpace.clientWidth - (heroPos.width)){
         heroLeft = newLeft;
     }else if(newLeft<=0){
@@ -65,8 +63,10 @@ function moveDir(motionDir){
         playBonk = true;
     }
     if(playBonk==true){
+        bonkers.currentTime = 0;
         bonkers.play();
     }else{
+        footsteps.currentTime = 0;
         footsteps.play();
     }
     gsap.to(hero, { backgroundColor:randoCol(), top: heroTop, left:heroLeft, duration: .5 });
