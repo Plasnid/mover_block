@@ -3,10 +3,35 @@
     padding: 0;
     text-decoration: none;
 }
-
+.handjet-title {
+    font-family: "Handjet", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings:
+        "ELGR" 1.7,
+        "ELSH" 9.6;
+}
+.handjet-instructions {
+    font-family: "Handjet", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+    font-variation-settings:
+        "ELGR" 1.5,
+        "ELSH" 4.5;
+}
+header, #instructions{
+    text-align: center;
+}
+header>h1{
+    font-weight: 800;
+    font-size: 3em;
+    display: inline-block;
+    margin: 5px auto 10px;
+}
 main{
     width: 100vw;
-    height: 100vh;
+    height: 90vh;
     position: relative;
 }
 #playSpace{
@@ -17,10 +42,13 @@ main{
     margin: 0 auto;
     position: relative;
 }
-
 #mainChar{
     width: 20px;
     height: 20px;
     position: absolute;
     background-color: blue;
+}
+#instructions>p{
+    font-size: 2em;
+    color: blue;
 }
