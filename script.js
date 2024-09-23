@@ -44,7 +44,8 @@ function randoCol(){
     for (let i = 0; i < 6; i++) {
         color += letters[Math.floor(Math.random() * 16)];
     }
-    console.log(color);
+    let style = `color:${color}; font-family: "Sofadi One", system-ui; font-weight: 400; font-style: normal;`;
+    console.log(`%c${color}`+"%cis the colour", style, "font-size: 3em;");
     return color;
 }
 function keyPressAction(e){
