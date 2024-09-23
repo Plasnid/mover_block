@@ -42,7 +42,7 @@ main{
     margin: 0 auto;
     position: relative;
 }
-#mainChar{
+#hero{
     width: 20px;
     height: 20px;
     position: absolute;

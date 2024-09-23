@@ -8,35 +8,44 @@ let footsteps = document.querySelector("#moveSound");
 let playSpace = document.querySelector("#playSpace");
 
 //* reference the main character
-let mainChar = document.querySelector("#mainChar");
-charPos = mainChar.getBoundingClientRect();
-console.log(charPos.width);
-let charTop = (playSpace.clientHeight)/2;
-let charLeft = (playSpace.clientWidth)/2;
-mainChar.style.top = `${charTop}px`;
-mainChar.style.left = `${charLeft}px`;
+let hero = document.querySelector("#hero");
+heroPos = hero.getBoundingClientRect();
+console.log(heroPos.width);
+let heroTop = (playSpace.clientHeight)/2;
+let heroLeft = (playSpace.clientWidth)/2;
+hero.style.top = `${heroTop}px`;
+hero.style.left = `${heroLeft}px`;
 
 //capture key presses
 document.addEventListener("keydown", keyPressAction);
 function moveDir(motionDir){
-    newLeft = charLeft + (speed*motionDir.hs);
-    newTop =  charTop + (speed*motionDir.vs);
-    if(newLeft>0 && newLeft<playSpace.clientWidth - (charPos.width)){
-        charLeft = newLeft;
+    newLeft = heroLeft + (speed*motionDir.hs);
+    newTop =  heroTop + (speed*motionDir.vs);
+    if(newLeft>0 && newLeft<playSpace.clientWidth - (heroPos.width)){
+        heroLeft = newLeft;
     }else if(newLeft<=0){
-        charLeft = 0;
+        heroLeft = 0;
     }else{
-        charLeft = playSpace.clientWidth-charPos.width;
+        heroLeft = playSpace.clientWidth-heroPos.width;
     }
-    if(newTop>0 && newTop<playSpace.clientHeight - (charPos.width/2)){
-        charTop = newTop;
+    if(newTop>0 && newTop<playSpace.clientHeight - (heroPos.width/2)){
+        heroTop = newTop;
     }else if(newTop<=0){
-        charTop = 0;
+        heroTop = 0;
     }else{
-        charTop = playSpace.clientHeight-charPos.height;
+        heroTop = playSpace.clientHeight-heroPos.height;
     }
     footsteps.play();
-    gsap.to(mainChar, { top: charTop, left:charLeft, duration: .5 });
+    gsap.to(hero, { backgroundColor:randoCol(), top: heroTop, left:heroLeft, duration: .5 });
+}
+function randoCol(){
+    let letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    console.log(color);
+    return color;
 }
 function keyPressAction(e){
     switch(e.keyCode){
